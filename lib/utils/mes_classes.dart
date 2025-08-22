@@ -21,6 +21,7 @@ class Utilisateur {
   String empreinte;
   String role;
   List<double> visage;
+  String? telephone;
 
   /// Nouveau champ : codePin (optionnel)
   String? codePin;
@@ -34,6 +35,7 @@ class Utilisateur {
     required this.empreinte,
     required this.role,
     required this.visage,
+    this.telephone, // par défaut null
     this.codePin,   // par défaut null
   });
 
@@ -48,6 +50,7 @@ class Utilisateur {
       'empreinte': empreinte,
       'role': role,
       'visage': visage,
+      'telephone': telephone,
       'codePin': codePin, // ajouté dans la map
     };
   }
@@ -63,6 +66,7 @@ class Utilisateur {
       empreinte: map['empreinte'],
       role: map['role'],
       visage: List<double>.from(map['visage'] ?? []),
+      telephone: map['telephone'],
       codePin: map['codePin'], // peut être null si pas encore défini
     );
   }

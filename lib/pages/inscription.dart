@@ -18,6 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _adresseController = TextEditingController();
+  final _telephoneController = TextEditingController();
 
   bool _obscureText = true;
   bool _isLoading = false;
@@ -43,6 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
           prenom: _prenomController.text.trim(),
           dateCreation: DateTime.now(),
           adresse: _adresseController.text.trim(),
+          telephone: _telephoneController.text.trim(),
           empreinte: "",
           role: "parent", // valeur par défaut
           visage: [],
@@ -84,6 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     _adresseController.dispose();
+    _telephoneController.dispose();
     super.dispose();
   }
 
@@ -166,6 +169,21 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         validator: (value) =>
                             value!.isEmpty ? "Veuillez entrer votre adresse" : null,
+                      ),
+                      const SizedBox(height: 20),
+                      // Téléphone
+                      TextFormField(
+                        controller: _telephoneController,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          labelText: "Téléphone",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          prefixIcon: const Icon(Icons.phone),
+                        ),
+                        validator: (value) =>
+                            value!.isEmpty ? "Veuillez entrer votre numéro" : null,
                       ),
                       const SizedBox(height: 20),
                       // Mot de passe

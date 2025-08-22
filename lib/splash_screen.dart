@@ -1,18 +1,24 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
+/// Écran d'accueil animé qui détermine la route initiale selon l'état persistant:
+/// - onboarding complété (onboarding_completed)
+/// - dernière route et activité récente (last_route, last_active_ms)
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+/// State gérant l'animation du logo et la redirection différée.
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   double _opacity = 0;
   double _scale = 0.8;
 
+  /// Initialise l'animation d'entrée et programme la redirection.
+  /// Le Timer applique une fenêtre de reprise (1h) pour restaurer la dernière route récente,
+  /// sinon redirige vers la page de connexion après l'onboarding.
   @override
   void initState() {
     super.initState();
@@ -30,20 +36,26 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       if (!mounted) return;
       final prefs = await SharedPreferences.getInstance();
       final onboardingDone = prefs.getBool('onboarding_completed') ?? false;
-      final currentUser = FirebaseAuth.instance.currentUser;
+      final lastRoute = prefs.getString('last_route');
+      final lastActiveMs = prefs.getInt('last_active_ms') ?? 0;
+      final nowMs = DateTime.now().millisecondsSinceEpoch;
+      const resumeWindowMs = 60 * 60 * 1000; // 1 heure
+      final isRecent = (nowMs - lastActiveMs) <= resumeWindowMs;
 
-      if (currentUser != null) {
-        Navigator.pushReplacementNamed(context, '/parent_home');
+      if (!onboardingDone) {
+        Navigator.pushReplacementNamed(context, '/onboarding');
         return;
       }
-      if (onboardingDone) {
-        Navigator.pushReplacementNamed(context, '/login_page');
+
+      if (isRecent && lastRoute != null) {
+        Navigator.pushReplacementNamed(context, lastRoute);
       } else {
-        Navigator.pushReplacementNamed(context, '/onboarding');
+        Navigator.pushReplacementNamed(context, '/login_page');
       }
     });
   }
 
+  /// Construit l'UI du splash: logo animé (opacity/scale) sur fond blanc.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

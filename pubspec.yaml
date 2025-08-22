@@ -39,6 +39,8 @@ dependencies:
   cloud_firestore: ^5.4.4
   firebase_auth: ^5.7.0
   shared_preferences: ^2.3.2
+  local_auth: ^2.3.0
+  webview_flutter: ^4.7.0
   cupertino_icons: ^1.0.8
 
 dev_dependencies:

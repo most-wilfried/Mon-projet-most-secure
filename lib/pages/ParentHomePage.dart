@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import '../services/session_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'profilePage.dart';
 
 class ParentHomePage extends StatefulWidget {
   final String? uid; // Ajout du paramètre uid
@@ -28,20 +30,55 @@ class _ParentHomePageState extends State<ParentHomePage> {
     _listenPorte();
   }
 
-  // Initialiser depuis la session (évite une relecture Firestore)
-  void _initFromSession() {
+  // Initialiser depuis la session ; si vide, retomber sur FirebaseAuth + Firestore
+  Future<void> _initFromSession() async {
     final sm = SessionManager.instance;
-    setState(() {
-      userId = widget.uid ?? sm.userId;
-      userName = sm.nom;
-      userPrenom = sm.prenom;
-    });
+    if (sm.userId != null) {
+      setState(() {
+        userId = widget.uid ?? sm.userId;
+        userName = sm.nom;
+        userPrenom = sm.prenom;
+      });
+      return;
+    }
+
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      final uid = widget.uid ?? currentUser.uid;
+      try {
+        final doc = await FirebaseFirestore.instance
+            .collection('utilisateurs')
+            .doc(uid)
+            .get();
+        final data = doc.data();
+        final nom = (data != null && data['nom'] is String) ? data['nom'] as String : null;
+        final prenom = (data != null && data['prenom'] is String) ? data['prenom'] as String : null;
+        final role = (data != null && data['role'] is String) ? data['role'] as String : null;
+        setState(() {
+          userId = uid;
+          userName = nom ?? '';
+          userPrenom = prenom ?? '';
+        });
+        await SessionManager.instance.setSession(
+          uid: uid,
+          email: currentUser.email,
+          role: role,
+          nom: nom,
+          prenom: prenom,
+        );
+      } catch (_) {
+        setState(() {
+          userId = uid;
+        });
+      }
+    }
   }
 
   // Persister la dernière route pour reprise d'état
   Future<void> _persistLastRoute() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('last_route', '/parent_home');
+    await prefs.setInt('last_active_ms', DateTime.now().millisecondsSinceEpoch);
   }
 
   // Écouter l'état de la porte en temps réel
@@ -74,6 +111,8 @@ class _ParentHomePageState extends State<ParentHomePage> {
           .collection("etat_porte")
           .doc("porte1")
           .set({"etat": value});
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('last_active_ms', DateTime.now().millisecondsSinceEpoch);
       // N'insérer dans l'historique que lors de l'ouverture
       if (value == true) {
         await FirebaseFirestore.instance.collection("historique").add({
@@ -115,9 +154,16 @@ class _ParentHomePageState extends State<ParentHomePage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.account_circle, size: 30),
-            onPressed: () {
-              // Navigation vers profil parent
+            icon: const Icon(Icons.account_circle, size: 30, color: Color(0xFF3A59D1)),
+            onPressed: () async {
+              await showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                ),
+                builder: (context) => const ParentProfileSheet(),
+              );
             },
           )
         ],

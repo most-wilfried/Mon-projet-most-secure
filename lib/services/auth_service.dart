@@ -13,6 +13,7 @@ class AuthService {
     required String email,
     required String password,
     required String adresse,
+    String? telephone,
     String role = "parent",
   }) async {
     try {
@@ -28,6 +29,7 @@ class AuthService {
         prenom: prenom.trim(),
         dateCreation: DateTime.now(),
         adresse: adresse.trim(),
+        telephone: telephone?.trim(),
         empreinte: "",
         role: role,
         visage: [],
