@@ -1,21 +1,41 @@
 {
   "project_info": {
-    "project_number": "110640032902",
-    "project_id": "most-64840",
-    "storage_bucket": "most-64840.firebasestorage.app"
+    "project_number": "150393919593",
+    "firebase_url": "https://most-3a4db-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "most-3a4db",
+    "storage_bucket": "most-3a4db.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:110640032902:android:7adaecd3a5a6caf967b507",
+        "mobilesdk_app_id": "1:150393919593:android:20bf060ba36f81390d6af8",
         "android_client_info": {
-          "package_name": "com.example.test2"
+          "package_name": "com.example.most_secure"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC7P9jI7QnZrDPYZnzLKrS7-faRqDuaczA"
+          "current_key": "AIzaSyDEHWaLm4Zc_y4IBF021UwkE59es_m0f5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150393919593:android:97f13e75a53d66ef0d6af8",
+        "android_client_info": {
+          "package_name": "com.exemple.most_secure"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEHWaLm4Zc_y4IBF021UwkE59es_m0f5o"
         }
       ],
       "services": {

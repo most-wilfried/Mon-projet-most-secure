@@ -105,7 +105,7 @@ class _LockScreenState extends State<LockScreen> {
         _goToLogin();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Code incorrect (${_attempts}/$_maxAttempts)')),
+          SnackBar(content: Text('Code incorrect ($_attempts/$_maxAttempts)')),
         );
       }
     }

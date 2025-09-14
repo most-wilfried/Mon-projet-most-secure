@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../utils/mes_classes.dart';  
+import '../utils/mes_classes.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -17,10 +17,11 @@ class AuthService {
     String role = "parent",
   }) async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email.trim(),
-        password: password.trim(),
-      );
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(
+            email: email.trim(),
+            password: password.trim(),
+          );
 
       // Création de l'utilisateur pour Firestore
       Utilisateur newUser = Utilisateur(
@@ -30,15 +31,18 @@ class AuthService {
         dateCreation: DateTime.now(),
         adresse: adresse.trim(),
         telephone: telephone?.trim(),
-        empreinte: "",
+        empreinte: 0, // Doit être un int, comme dans la classe Utilisateur.
         role: role,
         visage: [],
       );
 
       // Enregistrement du document dans la collection "utilisateurs"
-      await _firestore.collection("utilisateurs").doc(newUser.id).set(newUser.toMap());
+      await _firestore
+          .collection("utilisateurs")
+          .doc(newUser.id)
+          .set(newUser.toMap());
 
-      return null;  // null signifie succès
+      return null; // null signifie succès
     } on FirebaseAuthException catch (e) {
       return e.message;
     } catch (e) {

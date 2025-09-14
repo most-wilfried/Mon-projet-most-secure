@@ -33,11 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       'title': 'Détection d’intrusion avancée',
       'description': ' Un laser de détection, des capteurs infrarouges et des alarmes protègent chaque recoin de votre maison.',
     },
-    {
-      'image': 'assets/images/page5.png',
-      'title': ' Soyez toujours informé',
-      'description': 'Recevez des notifications instantanées sur votre mobile en cas d’anomalie ou d’intrusion.',
-    },
+    
   ];
 
   void _nextPage() {

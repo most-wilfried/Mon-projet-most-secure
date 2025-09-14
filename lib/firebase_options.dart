@@ -41,48 +41,60 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAcfZfvlWG6La-fuxWi-gVox7DIiON6wwA',
-    appId: '1:110640032902:web:f060114f52a0671567b507',
-    messagingSenderId: '110640032902',
-    projectId: 'most-64840',
-    authDomain: 'most-64840.firebaseapp.com',
-    storageBucket: 'most-64840.firebasestorage.app',
-    measurementId: 'G-MG80NL1846',
+    apiKey: 'AIzaSyDEHWaLm4Zc_y4IBF021UwkE59es_m0f5o',
+    appId:
+        '1:150393919593:web:YOUR_WEB_APP_ID', // Remplacez par votre Web App ID
+    messagingSenderId: '150393919593',
+    projectId: 'most-3a4db',
+    authDomain: 'most-3a4db.firebaseapp.com',
+    storageBucket: 'most-3a4db.firebasestorage.app',
+    databaseURL:
+        'https://most-3a4db-default-rtdb.asia-southeast1.firebasedatabase.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC7P9jI7QnZrDPYZnzLKrS7-faRqDuaczA',
-    appId: '1:110640032902:android:7adaecd3a5a6caf967b507',
-    messagingSenderId: '110640032902',
-    projectId: 'most-64840',
-    storageBucket: 'most-64840.firebasestorage.app',
+    apiKey: 'AIzaSyDEHWaLm4Zc_y4IBF021UwkE59es_m0f5o',
+    appId: '1:150393919593:android:20bf060ba36f81390d6af8',
+    messagingSenderId: '150393919593',
+    projectId: 'most-3a4db',
+    databaseURL:
+        'https://most-3a4db-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'most-3a4db.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC9XKtApMl-szMFOtoVdSMJAdyMQ2akCYc',
-    appId: '1:110640032902:ios:d0f47d192847179767b507',
-    messagingSenderId: '110640032902',
-    projectId: 'most-64840',
-    storageBucket: 'most-64840.firebasestorage.app',
-    iosBundleId: 'com.example.test2',
+    apiKey: 'AIzaSyDEHWaLm4Zc_y4IBF021UwkE59es_m0f5o',
+    appId:
+        '1:150393919593:ios:YOUR_IOS_APP_ID', // Remplacez par votre iOS App ID
+    messagingSenderId: '150393919593',
+    projectId: 'most-3a4db',
+    storageBucket: 'most-3a4db.firebasestorage.app',
+    databaseURL:
+        'https://most-3a4db-default-rtdb.asia-southeast1.firebasedatabase.app',
+    iosBundleId: 'com.example.most_secure',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyC9XKtApMl-szMFOtoVdSMJAdyMQ2akCYc',
-    appId: '1:110640032902:ios:d0f47d192847179767b507',
-    messagingSenderId: '110640032902',
-    projectId: 'most-64840',
-    storageBucket: 'most-64840.firebasestorage.app',
-    iosBundleId: 'com.example.test2',
+    apiKey: 'AIzaSyDEHWaLm4Zc_y4IBF021UwkE59es_m0f5o',
+    appId:
+        '1:150393919593:ios:YOUR_MACOS_APP_ID', // Remplacez par votre macOS App ID
+    messagingSenderId: '150393919593',
+    projectId: 'most-3a4db',
+    storageBucket: 'most-3a4db.firebasestorage.app',
+    databaseURL:
+        'https://most-3a4db-default-rtdb.asia-southeast1.firebasedatabase.app',
+    iosBundleId: 'com.example.most_secure',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAcfZfvlWG6La-fuxWi-gVox7DIiON6wwA',
-    appId: '1:110640032902:web:7bca93ede3a0c02067b507',
-    messagingSenderId: '110640032902',
-    projectId: 'most-64840',
-    authDomain: 'most-64840.firebaseapp.com',
-    storageBucket: 'most-64840.firebasestorage.app',
-    measurementId: 'G-RT67L857ZV',
+    apiKey: 'AIzaSyDEHWaLm4Zc_y4IBF021UwkE59es_m0f5o',
+    appId:
+        '1:150393919593:web:YOUR_WINDOWS_APP_ID', // Remplacez par votre Windows App ID
+    messagingSenderId: '150393919593',
+    projectId: 'most-3a4db',
+    authDomain: 'most-3a4db.firebaseapp.com',
+    storageBucket: 'most-3a4db.firebasestorage.app',
+    databaseURL:
+        'https://most-3a4db-default-rtdb.asia-southeast1.firebasedatabase.app',
   );
 }
